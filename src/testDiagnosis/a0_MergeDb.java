@@ -1,4 +1,4 @@
-package functions;
+package testDiagnosis;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -52,19 +52,15 @@ public class a0_MergeDb {
 			}
 		};
 		
-		for(int i = 0; i < personalDirs.length; i++){
-			String dbDir = Configuration.dataDir + personalDirs[i];
-			System.out.println(dbDir);
-			File fMulu = new File(dbDir);
-			File[] fList = fMulu.listFiles(ff);
-			for(int j = 0; j < fList.length; j++){
-				String dbPath = fList[j].getAbsolutePath();
-				System.out.println("\t" + dbPath);
-				
-				// 把当前数据库的数据读到新的数据库
-				insertIntoDb(dbPath, Configuration.dataDir_target + dbCombine, i);
-								
-			}
+		File fMulu = new File(Configuration.dataForTestDir);
+		File[] fList = fMulu.listFiles(ff);
+		for(int j = 0; j < fList.length; j++){
+			String dbPath = fList[j].getAbsolutePath();
+			System.out.println("\t" + dbPath);
+			
+			// 把当前数据库的数据读到新的数据库
+			insertIntoDb(dbPath, Configuration.dataDir_target + dbCombine, -1);
+							
 		}
 		
 		long endtime = System.currentTimeMillis();
@@ -144,7 +140,6 @@ public class a0_MergeDb {
 	}
 	
 	public static void insertIntoDb(String fromPath, String toPath, int index){
-		String personalDir = personalDirs[index];
 		
 		Connection c = null;
 	    Statement stmt = null;
@@ -199,7 +194,8 @@ public class a0_MergeDb {
 	    	  String path = rs.getString("path");
 	    	  String hisid = rs.getString("hisid");
 	    	  
-	    	  path = Configuration.dataDir + personalDir + path.replace(dirCommonOld, "").replace(dirCommonOld2, "").replace(dirCommonOld3, "");
+	    	  path = Configuration.dataForTestDir.substring(0, Configuration.dataForTestDir.lastIndexOf("/"))
+	    			  + path.replace(dirCommonOld, "").replace(dirCommonOld2, "").replace(dirCommonOld3, "");
 	    	  
 	    	  // System.out.println(path);
 
@@ -234,7 +230,8 @@ public class a0_MergeDb {
 	    	  String risk = rs.getString("risk");
 	    	  String tirads = rs.getString("tirads");
 	    	  
-	    	  path = Configuration.dataDir + personalDir + path.replace(dirCommonOld, "").replace(dirCommonOld2, "").replace(dirCommonOld3, "");
+	    	  path = Configuration.dataForTestDir.substring(0, Configuration.dataForTestDir.lastIndexOf("/"))
+	    			  + path.replace(dirCommonOld, "").replace(dirCommonOld2, "").replace(dirCommonOld3, "");
 	    	  
 		      ResultSet rsto = stmtto.executeQuery( "select * from regions where regionid = " + id +";" );
 	    	  if(rsto.next()){

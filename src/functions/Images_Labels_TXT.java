@@ -11,13 +11,19 @@ import tools.MyImageOperator;
 
 public class Images_Labels_TXT {
 
-	private final static String dataPath = "D:/甲状腺标注/甲状腺标注数据20170525/甲状腺数据-20170525/";
-	private final static String dataResultPath = "D:/甲状腺标注/甲状腺标注数据20170525/甲状腺数据-按特征分开-20170525/";
-	private final static String dataResult_image_path = "D:/甲状腺标注/甲状腺标注数据20170525/MyDataset/Images";
-	private final static String dataResult_small_image_path = "D:/甲状腺标注/甲状腺标注数据20170525/MyDataset/Images_small";
-	private final static String dataResult_crop_image_path = "D:/甲状腺标注/甲状腺标注数据20170525/MyDataset/Images_small_my_crop";
-	private final static String dataResult_label_path = "D:/甲状腺标注/甲状腺标注数据20170525/MyDataset/Labels";
-	private final static String dataTxtName = "data.txt";
+	// private final static String dataPath = "D:/甲状腺标注/甲状腺标注数据20170525/甲状腺数据-20170525/";
+	private final static String dataPath = Configuration.dataDir_target + "甲状腺数据-" + Configuration.strDate + "/";
+	// private final static String dataResultPath = "D:/甲状腺标注/甲状腺标注数据20170525/甲状腺数据-按特征分开-20170525/";
+	private final static String dataResultPath = Configuration.dataDir_target + "甲状腺数据-按特征分开-" + Configuration.strDate + "/";
+	//private final static String dataResult_image_path = "D:/甲状腺标注/甲状腺标注数据20170525/MyDataset/Images";
+	private final static String dataResult_image_path = Configuration.dataDir_target + "MyDataset/Images";
+	//private final static String dataResult_small_image_path = "D:/甲状腺标注/甲状腺标注数据20170525/MyDataset/Images_small";
+	private final static String dataResult_small_image_path = Configuration.dataDir_target + "MyDataset/Images_small";
+	//private final static String dataResult_crop_image_path = "D:/甲状腺标注/甲状腺标注数据20170525/MyDataset/Images_small_my_crop";
+	//private final static String dataResult_crop_image_path = Configuration.dataDir_target + "MyDataset/Images_small_my_crop";
+	//private final static String dataResult_label_path = "D:/甲状腺标注/甲状腺标注数据20170525/MyDataset/Labels";
+	private final static String dataResult_label_path = Configuration.dataDir_target + "MyDataset/Labels";
+	private final static String dataTxtName = "data-crop.txt";
 	
 	
 	public static void main(String[] args) {
@@ -56,8 +62,10 @@ public class Images_Labels_TXT {
 		File file3 = new File(dataResult_small_image_path);
 		file3.mkdirs();
 		
+		/*
 		File file4 = new File(dataResult_crop_image_path);
 		file4.mkdirs();
+		*/
 	}
 
 	public static void copyImages(){
@@ -109,15 +117,26 @@ public class Images_Labels_TXT {
 			int nxmax = (int) (width * dxmax);
 			int nymax = (int) (height * dymax);
 			
+			nxmin = nxmin < 0 ? 0 : nxmin;
+			nymin = nymin < 0 ? 0 : nymin;
+			nxmax = nxmax > width ? width - 1 : nxmax;
+			nymax = nymax > height ? height - 1 : nymax;
+			
 			strPosition = nxmin + "," + nymin + "," + nxmax + "," + nymax;
 			System.out.println(strPosition);
 			
 			
 			if(strs[5].trim().equals("良性")){
-				MyFileHelper.copyFile(dataPath + strs[2], dataResult_image_path + "/" + strs[1]);				
+				String strName111 = strs[2];
+				if(strName111.indexOf("_") == 0){
+					strName111 = strName111.replaceFirst("_", "").trim();
+				}else{
+					System.exit(-1);
+				}
+				MyFileHelper.copyFile(dataPath + strs[2], dataResult_image_path + "/" + strName111);		
 				
-				String strName = strs[1].trim();
-				strName = strName.substring(0,  strName.indexOf("."));
+				String strName = strName111;
+				strName = strName.substring(0,  strName.lastIndexOf("."));
 				File file = new File(dataResult_label_path + "/" + strName + ".txt");
 				try {
 					FileWriter fWriter = new FileWriter(file);
@@ -144,10 +163,16 @@ public class Images_Labels_TXT {
 			    */
 			}
 			if(strs[5].trim().equals("恶性")){
-				MyFileHelper.copyFile(dataPath + strs[2], dataResult_image_path + "/" + strs[1]);
+				String strName111 = strs[2];
+				if(strName111.indexOf("_") == 0){
+					strName111 = strName111.replaceFirst("_", "").trim();
+				}else{
+					System.exit(-1);
+				}
+				MyFileHelper.copyFile(dataPath + strs[2], dataResult_image_path + "/" + strName111);
 				
-				String strName = strs[1].trim();
-				strName = strName.substring(0,  strName.indexOf("."));
+				String strName = strName111;
+				strName = strName.substring(0,  strName.lastIndexOf("."));
 				File file = new File(dataResult_label_path + "/" + strName + ".txt");
 				try {
 					FileWriter fWriter = new FileWriter(file);

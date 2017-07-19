@@ -14,26 +14,33 @@ import org.omg.CORBA.PRIVATE_MEMBER;
 
 import tools.MyFileHelper;
 
-public class GoodBadImages {
+public class GoodBadImages_rm_crop {
 	/*
 	 * 整理数据给深度学习
 	 * 
 	 * 把原始图片、切出来的图片以及相关有用的数据整理出来
 	 * 
+	 * 和GoodBadImages.java不一样的是，本类会去掉那些小图的原图有问题的图
+	 * 
+	 * 具体来讲，就是如果小图的原图所属的文件夹含有:region_crop，就说明这个原图是被裁剪过的，就去掉
+	 * 
 	 */
 	
 	private final static String dbName = "data-after.db";
+	// private final static String dataPath = "D:/甲状腺标注/甲状腺标注数据20170525/甲状腺数据-20170525/";
 	private final static String dataPath = Configuration.dataDir_target + "甲状腺数据-" + Configuration.strDate + "/";
 	
-	private final static String dataTxtName = "data.txt";
-	private final static String dataLETxtName = "data-良恶性.txt";
-	private final static String dataLENumberTxtName = "data-良恶性-数量.txt";
+	private final static String dataTxtName = "data-crop.txt";
+	private final static String dataLETxtName = "data-良恶性-crop.txt";
+	private final static String dataLENumberTxtName = "data-良恶性-数量-crop.txt";
 	private final static String dicTxtName = "dic.txt";
 	private final static String dicTxtName_old = "new_edition.txt";
 	private static int n = 0;
 	private static int nL = 0;
 	private static int nE = 0;
 	private static int nW = 0;
+	
+	private static int nn_crop = 0;
 
 	public static void main(String[] args) {
 		mainmain();
@@ -118,9 +125,22 @@ public class GoodBadImages {
 	    	  String cropfactor = rs.getString("cropfactor");
 	    	  String risk = rs.getString("risk");
 	    	  String tirads = rs.getString("tirads");
-	         
 	    	  
 	    	  System.out.println(n + "\t" + id + "\t" + path + "\t" + pathOrigion + "\t" + cropfactor + "\t" + diagnose);
+	    	  
+	    	  //如果path的最后一个目录含有crop和region就说明这个图的原图已经是被裁剪过的小图
+	    	  String strDirLast = path.trim();
+	    	  strDirLast = strDirLast.substring(0, strDirLast.lastIndexOf("/"));
+	    	  strDirLast = strDirLast.substring(strDirLast.lastIndexOf("/") + 1).trim();
+	    	  
+	    	  System.out.println(strDirLast);
+	    	  
+	    	  if(strDirLast.startsWith("region") && strDirLast.endsWith("_crop")){
+	    		  System.out.println("region_crop");
+	    		  nn_crop ++;
+	    		  continue;
+	    	  }
+
 	    	  String hz = MyFileHelper.getHouzhuiByFileName(path);
 	    	  String hzO = MyFileHelper.getHouzhuiByFileName(pathOrigion);
 	    	  String str = id + hz;
@@ -252,8 +272,8 @@ public class GoodBadImages {
 		
 		try {
 			FileWriter fWriter = new FileWriter(file);
-			fWriter.write("总数" + "\t" + "良性" + "\t" + "恶性" + "\t" + "未知" + "\r\n");
-			fWriter.write(n + "\t" + nL + "\t" + nE + "\t" + nW + "\r\n");
+			fWriter.write("总数" + "\t" + "良性" + "\t" + "恶性" + "\t" + "未知" + "\t" + "crop_number" + "\r\n");
+			fWriter.write(n + "\t" + nL + "\t" + nE + "\t" + nW + "\t" + nn_crop + "\r\n");
 			fWriter.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

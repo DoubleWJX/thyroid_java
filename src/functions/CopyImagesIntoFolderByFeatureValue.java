@@ -7,10 +7,12 @@ import tools.MyFileHelper;
 
 public class CopyImagesIntoFolderByFeatureValue {
 
-	private final static String dataPath = "D:/甲状腺标注/甲状腺标注数据20170525/甲状腺数据-20170525/";
-	private final static String dataResultPath = "D:/甲状腺标注/甲状腺标注数据20170525/甲状腺数据-按特征分开-20170525/";
-	private final static String dataResultPath_Good = "D:/甲状腺标注/甲状腺标注数据20170525/甲状腺数据-按特征分开-20170525/良性/";
-	private final static String dataResultPath_Bad = "D:/甲状腺标注/甲状腺标注数据20170525/甲状腺数据-按特征分开-20170525/恶性/";
+private final static String dataPath = Configuration.dataDir_target + "甲状腺数据-" + Configuration.strDate + "/";
+	
+	private final static String dataResultPath = Configuration.dataDir_target + "甲状腺数据-按特征分开-" + Configuration.strDate + "/";
+	private final static String dataResultPath_Good = Configuration.dataDir_target + "甲状腺数据-按特征分开-" + Configuration.strDate + "/良性/";
+	private final static String dataResultPath_Bad = Configuration.dataDir_target + "甲状腺数据-按特征分开-" + Configuration.strDate + "/恶性/";
+	
 	private final static String dataTxtName = "data.txt";
 	private final static String dicTxtName = "dic.txt";
 	

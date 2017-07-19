@@ -16,10 +16,9 @@ public class StatNumbers {
 	 * 
 	 */
 	
-	private final static String dirCommon = "D:/甲状腺标注/甲状腺标注数据20170525/";
 	private final static String dataLETxtName = "data-良恶性.txt";
 	
-	private final static String dataPath = "D:/甲状腺标注/甲状腺标注数据20170525/甲状腺数据-20170525/";
+	private final static String dataPath = Configuration.dataDir_target + "甲状腺数据-" + Configuration.strDate + "/";
 	private final static String dicTxtName = "dic.txt";
 	private final static int nAtLeast = 2000;
 	
@@ -42,7 +41,7 @@ public class StatNumbers {
 			System.out.println(numbers[i]);
 		}
 		
-		File file = new File(dirCommon + dataLETxtName);
+		File file = new File(Configuration.dataDir_target + dataLETxtName);
 		int nLast = 0;
 		try {
 			BufferedReader br= new BufferedReader(new FileReader(file));
