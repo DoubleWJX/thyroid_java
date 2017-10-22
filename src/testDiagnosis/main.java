@@ -18,6 +18,8 @@ public class main {
 		
 		b0_CheckDB.mainmain();
 		
+		GoodBadImages.mainmain();
+		
 	}
 
 }

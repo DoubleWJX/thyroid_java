@@ -80,7 +80,7 @@ public class Images_Labels_TXT {
 			str = list.get(i);
 			strs = str.split("\t");
 			
-			System.out.println(str);
+			// System.out.println(str);
 			
 			str = list.get(i);
 			strs = str.split("\t");
@@ -93,9 +93,10 @@ public class Images_Labels_TXT {
 			int width = MyImageHelper.getImgWidth(fileImage);
 			int height = MyImageHelper.getImgHeight(fileImage);
 			
-			System.out.println("size = " + "\t" + width + "\t" + height);
+			// System.out.println("size = " + "\t" + width + "\t" + height);
 			
 			if(width <= 0 || height <= 0){
+				System.out.println(list.size() + "\t" + strs[0] + "\t" + strs[1] + "\t" + strs[5]);
 				System.out.println("continue");
 				continue;
 			}
@@ -123,7 +124,7 @@ public class Images_Labels_TXT {
 			nymax = nymax > height ? height - 1 : nymax;
 			
 			strPosition = nxmin + "," + nymin + "," + nxmax + "," + nymax;
-			System.out.println(strPosition);
+			// System.out.println(strPosition);
 			
 			
 			if(strs[5].trim().equals("良性")){

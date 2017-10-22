@@ -20,7 +20,7 @@ public class StatNumbers {
 	
 	private final static String dataPath = Configuration.dataDir_target + "甲状腺数据-" + Configuration.strDate + "/";
 	private final static String dicTxtName = "dic.txt";
-	private final static int nAtLeast = 2000;
+	private final static int nAtLeast = 5000;
 	
 	
 	public static void main(String[] args) {
@@ -110,7 +110,7 @@ public class StatNumbers {
 			}
 			System.out.println();
 			
-			System.out.print("还需要\t\t");
+			System.out.print("还需要\t" + (nAtLeast - numbers[i]) + "\t");
 			for(int j = 0; j < list2.size(); j++){
 				if(list2.get(j) >= nAtLeast){
 					System.out.print("-\t");

@@ -12,11 +12,14 @@ public class a0_MergeDb {
 	private final static String dirCommonOld = "D:/甲状腺标注/标注数据"; // 这个是原始标注的数据库文件里面存放的路径
 	private final static String dirCommonOld2 = "F:/甲状腺标注/标注数据"; // 这个是原始标注的数据库文件里面存放的路径
 	private final static String dirCommonOld3 = "C:/Users/Administrator.WIN-20160112TAX/Desktop"; // 这个是原始标注的数据库文件里面存放的路径
+	private final static String dirCommonOld4 = "E:/BaiduYunDownload/王娟娟"; // 这个是原始标注的数据库文件里面存放的路径
+	private final static String dirCommonOld5 = "E:/BaiduYunDownload/刘如玉"; // 这个是原始标注的数据库文件里面存放的路径
 	
 	private final static String dbCombine = "data.db"; // 这个是合并后的数据库文件
 	
-	private final static String [] personalDirs = {"高璐莹", "刘佳", "刘如玉", "王娟娟", "王莹", "吴冬倩"}; // 每个标数据的人的名字
+	// private final static String [] personalDirs = {"高璐莹", "刘佳", "刘如玉", "王娟娟", "王莹", "吴冬倩"}; // 每个标数据的人的名字
 	// private final static String [] personalDirs = {"王莹"}; // 每个标数据的人的名字
+	private final static String [] personalDirs = {"高璐莹", "刘如玉", "王娟娟"}; // 每个标数据的人的名字
 	
 	public static void main(String[] args) {
 		mainmain();
@@ -66,6 +69,8 @@ public class a0_MergeDb {
 		long endtime = System.currentTimeMillis();
 		
 		System.out.println("\n总计耗时： " + (endtime - starttime)/(1.0 * 1000 * 60) + " 分钟");
+		
+		// b0_CheckDB.mainmain();
 	}
 	
 	public static void initDatas(){
@@ -195,7 +200,8 @@ public class a0_MergeDb {
 	    	  String hisid = rs.getString("hisid");
 	    	  
 	    	  path = Configuration.dataForTestDir.substring(0, Configuration.dataForTestDir.lastIndexOf("/"))
-	    			  + path.replace(dirCommonOld, "").replace(dirCommonOld2, "").replace(dirCommonOld3, "");
+	    			  + path.replace(dirCommonOld, "").replace(dirCommonOld2, "").replace(dirCommonOld3, "")
+	    			  .replace(dirCommonOld4, "").replace(dirCommonOld5, "");
 	    	  
 	    	  // System.out.println(path);
 
@@ -231,7 +237,8 @@ public class a0_MergeDb {
 	    	  String tirads = rs.getString("tirads");
 	    	  
 	    	  path = Configuration.dataForTestDir.substring(0, Configuration.dataForTestDir.lastIndexOf("/"))
-	    			  + path.replace(dirCommonOld, "").replace(dirCommonOld2, "").replace(dirCommonOld3, "");
+	    			  + path.replace(dirCommonOld, "").replace(dirCommonOld2, "").replace(dirCommonOld3, "")
+	    			  .replace(dirCommonOld4, "").replace(dirCommonOld5, "");
 	    	  
 		      ResultSet rsto = stmtto.executeQuery( "select * from regions where regionid = " + id +";" );
 	    	  if(rsto.next()){

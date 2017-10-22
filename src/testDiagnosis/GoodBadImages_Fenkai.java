@@ -1,4 +1,4 @@
-package functions;
+package testDiagnosis;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,8 +13,6 @@ public class GoodBadImages_Fenkai {
 	private final static String dataResultPath = Configuration.dataDir_target + "甲状腺数据-按良恶性分开-" + Configuration.strDate + "/";
 	private final static String dataResultPath_Good = Configuration.dataDir_target + "甲状腺数据-按良恶性分开-" + Configuration.strDate + "/良性/";
 	private final static String dataResultPath_Bad = Configuration.dataDir_target + "甲状腺数据-按良恶性分开-" + Configuration.strDate + "/恶性/";
-	private final static String dataResultPath_Good_origin = Configuration.dataDir_target + "甲状腺数据-按良恶性分开-" + Configuration.strDate + "/良性-原图/";
-	private final static String dataResultPath_Bad_origin = Configuration.dataDir_target + "甲状腺数据-按良恶性分开-" + Configuration.strDate + "/恶性-原图/";
 	private final static String dataTxtName = "data.txt";
 	
 	public static void main(String[] args) {
@@ -64,11 +62,9 @@ public class GoodBadImages_Fenkai {
 			System.out.println(list.size() + "\t" + strs[0] + "\t" + strs[1] + "\t" + strs[5]);
 			if(strs[5].trim().equals("良性")){
 				MyFileHelper.copyFile(dataPath + strs[1], dataResultPath_Good + strs[1]);
-				MyFileHelper.copyFile(dataPath + strs[2], dataResultPath_Good_origin + strs[2]);
 			}
 			if(strs[5].trim().equals("恶性")){
 				MyFileHelper.copyFile(dataPath + strs[1], dataResultPath_Bad + strs[1]);
-				MyFileHelper.copyFile(dataPath + strs[2], dataResultPath_Bad_origin + strs[2]);
 			}
 		}
 		
