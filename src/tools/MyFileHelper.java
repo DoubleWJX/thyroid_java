@@ -6,10 +6,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.security.auth.login.FailedLoginException;
 
@@ -84,5 +87,61 @@ public class MyFileHelper {
 		}
 		
 		return list;
+	}
+	
+	
+	public static void writeListToFile(ArrayList<String> list, String path, boolean append){
+		
+		String strXieru = "";
+		for(int i = 0; i < list.size(); ++i){
+			strXieru += list.get(i);
+		}
+		File file = new File(path);
+		FileWriter fWriter = null;
+		try {
+			fWriter = new FileWriter(file, append);
+			fWriter.write(strXieru);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				fWriter.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public static void writeStrToFile(String strXieru, String path, boolean append){
+		
+		File file = new File(path);
+		FileWriter fWriter = null;
+		try {
+			fWriter = new FileWriter(file, append);
+			fWriter.write(strXieru);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				fWriter.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public static List<String> getAllFiles(String strDir){
+		List<String> listImage = new ArrayList<>();
+		File fMulu = new File(strDir);
+		File[] fList = fMulu.listFiles();
+		for(int j = 0; j < fList.length; j++){
+			String imgName = fList[j].getName();
+			listImage.add(imgName);
+		}		
+		return listImage;
 	}
 }

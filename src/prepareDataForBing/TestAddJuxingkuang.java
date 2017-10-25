@@ -19,11 +19,18 @@ public class TestAddJuxingkuang {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String imgPath = "F:/甲状腺数据/AllTogether/MyVOC2007/JPEGImages/bad_1.jpg";
-		String imgPathTo = "F:/甲状腺数据/AllTogether/MyVOC2007/JPEGImages/bad_1-r.jpg";
+		String imgPath = "F:/甲状腺数据/AllTogether/MyVOC2007_20171023_500_500/JPEGImages/bad_0.jpg";
+		String imgPathTo = "d:/bad_0_r.jpg";
 		List<ArrayList<Float>> listPostions = new ArrayList<>();
 
 		addJuxingkuang(imgPath, imgPathTo, listPostions);
+		
+//		File fileImage = new File("D:/甲状腺标注/甲状腺标注数据20170525-1/刘如玉/20170111-liuruyu/陈会君/27.bmp");
+//
+//		int width = MyImageHelper.getImgWidth(fileImage);
+//		int height = MyImageHelper.getImgHeight(fileImage);
+//		
+//		System.out.println(width + "\t" + height);
 	}
 
 	
@@ -38,8 +45,8 @@ public class TestAddJuxingkuang {
 	        g.setColor(Color.green);//画笔颜色
 	        
 	        for(int ip = 0; ip < 1; ++ip){
-				float fx1 = (float) 140.0; float fy1 = (float) 78.0;
-				float fx2 = (float) 216.0; Float fy2 = (float) 126.0;
+				float fx1 = (float) 417.0; float fy1 = (float) 1.0;
+				float fx2 = (float) 672.0; Float fy2 = (float) 256.0;
 				
 				int x = (int) (fx1 * width), y = (int) (fy1 * height);
 				int w = (int) (width * (fx2 - fx1)), h = (int) (height * (fy2 - fy1));

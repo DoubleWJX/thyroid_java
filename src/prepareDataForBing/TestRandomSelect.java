@@ -18,6 +18,8 @@ public class TestRandomSelect {
 		for(int i = 0; i < 100; ++i){
 			System.out.println(list.get(i));
 		}
+		
+		System.out.println((int) 0.1);
 	}
 
 }

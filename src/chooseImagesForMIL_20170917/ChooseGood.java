@@ -12,7 +12,7 @@ import tools.MyFileHelper;
  * 本类根据之前处理好的良恶性txt文件，从中读取文件夹为良性数据并且病灶小图判断为良性或者未知的数据
  */
 public class ChooseGood {
-	public static String strPath = "D:/02 帅哥/06 多示例学习 甲状腺/11 我的数据集/00 测试集 - 良性数据/data";
+	public static String strPath = "D:/02 帅哥/06 多示例学习 甲状腺/11 我的数据集/00 训练集 - 良性数据/data";
 	public static String strResultTxt = strPath + "/data.txt";
 
 	public static void main(String[] args) {
